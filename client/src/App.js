@@ -8,7 +8,10 @@ import GameDetails from './components/GameDetails/GameDetails';
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
 import Profile from './components/Profile/Profile';
+import { config } from 'dotenv';
 import './App.css';
+
+config();
 
 const App = () => {
   return (

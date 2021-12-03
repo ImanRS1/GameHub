@@ -17,8 +17,10 @@ const Login = () => {
       email: e.target.children[0].children[0].value,
       password: e.target.children[1].children[0].value
     };
+
+    const url = process.env.USER_SERVER_PATH ? process.env.USER_SERVER_PATH : 'http://localhost:5000';
     
-    const data = await axios.post('http://localhost:5000/users/login', currentUser);
+    const data = await axios.post(`${url}/users/login`, currentUser);
 
     const user = {
       username: data.data.username,

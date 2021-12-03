@@ -28,7 +28,9 @@ const SignUp = () => {
       password: e.target.children[2].children[0].value
     };
 
-    const data = await axios.post('http://localhost:5000/users/join', newUser);
+    const url = process.env.USER_SERVER_PATH ? process.env.USER_SERVER_PATH : 'http://localhost:5000';
+
+    const data = await axios.post(`${url}/users/join`, newUser);
 
     const user = {
       username: data.data.username,

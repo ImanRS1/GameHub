@@ -16,7 +16,9 @@ const Burger = () => {
   };
 
   const fetchGenres = async () => {
-    const data = await axios.get('http://localhost:4000/api/genres');
+    const url = process.env.USER_SERVER_PATH ? process.env.GAME_SERVER_PATH : 'http://localhost:4000';
+
+    const data = await axios.get(`${url}/api/genres`);
     setGenres(data.data);
   };
 
