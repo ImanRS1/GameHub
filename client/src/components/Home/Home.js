@@ -7,7 +7,7 @@ const Home = () => {
   const [popularGames, setPopularGames] = useState([]);
   const [topRatedGames, setTopRatedGames] = useState([]);
 
-  console.log(process.env.GAME_SERVER_PATH);
+  console.log(process.env.REACT_APP_GAME_SERVER_PATH);
   
   const handleOnLoad = async () => {
     const url = process.env.GAME_SERVER_PATH ? process.env.GAME_SERVER_PATH : 'http://localhost:4000';
