@@ -4,11 +4,16 @@ import { useSelector } from 'react-redux';
 import './Profile.css';
 
 const Profile = () => {
-  const user = useSelector(state => console.log('state', state.user));
+  const user = useSelector(state => state.user);
 
   return (
     <div>
-      You are in!
+      <div>
+        <img src="" />
+      </div>
+      <div>
+        <h2>{user.userData.username}</h2>
+      </div>
     </div>
   );
 };
