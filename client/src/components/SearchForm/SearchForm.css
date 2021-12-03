@@ -1,0 +1,32 @@
+.search-bar {
+  width: 100%;
+  border: 1px solid #b10002;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+.search-bar__submit-button {
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  padding: 0.3rem 0.7rem 0.3rem 0.3rem;
+}
+
+.submit-button__icon {
+  cursor: pointer;
+}
+
+.search-bar__input-field {
+  width: 15rem;
+  border: none;
+  background-color: transparent;
+  color: white;
+}
+
+.search-bar__input-field:focus {
+  outline: none;
+}
+
+.search-bar__input-field::placeholder {
+  color: lightgray;
+}

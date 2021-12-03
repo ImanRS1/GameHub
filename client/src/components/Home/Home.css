@@ -1,0 +1,31 @@
+.page-content__slogan-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem 0;
+}
+
+.slogan-container__slogan {
+  text-align: center;
+  line-height: 2.4rem;
+}
+
+.page-content {
+  overflow: auto;
+}
+
+.page-content__trending-container,
+.page-content__reviewed-container {
+  height: 18rem;
+  padding: 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  overflow-x: auto;
+  background-color: rgba(177, 0, 2, 0.5);
+}
+
+.page-content__info {
+  margin: 1.5rem 0 0.5rem 0.5rem;
+  font-size: 1.2rem;
+}

@@ -1,0 +1,18 @@
+.page-content__results {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.results__search {
+  font-size: 0.8rem;
+  word-break: break-word;
+}
+
+.results__none {
+  padding: 2rem 1rem;
+  font-size: 2rem;
+  text-align: center;
+}

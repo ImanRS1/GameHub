@@ -1,0 +1,16 @@
+.page-header__user-button {
+  background: transparent;
+  border: none;
+  width: 3rem;
+  padding-right: 0.5rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.user-button__icon {
+  font-size: 2.2rem;
+  cursor: pointer;
+  color: white;
+}

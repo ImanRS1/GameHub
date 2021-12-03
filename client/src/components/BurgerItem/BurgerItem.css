@@ -1,0 +1,28 @@
+.genre-list{
+  position: relative;
+  width: 100%;
+  height: 3.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.genre-list__info{
+  text-align: center;
+  position: absolute;
+  font-size: 1rem;
+  z-index: 1000;
+  font-weight: bolder;
+}
+
+.genre-list__image{
+  width: 100%;
+  height: 3.2rem;
+  object-fit: cover;
+  filter: brightness(50%);
+  border: 1px solid black;
+}
+
+.genre-list__image:hover{
+  filter: brightness(80%);
+}
