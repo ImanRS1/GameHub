@@ -7,13 +7,12 @@ import './UserButton.css';
 
 const UserButton = () => {
   const user = useSelector(state => state.user);
-  console.log(user);
   return (
     <button className="page-header__user-button">
      { user.accessToken ? 
         <Link to={`/profile/${user.userData.username}`}>
           { user.userData.avatar ? 
-            <FontAwesomeIcon icon={faUserCircle} className="user-button__icon" />
+            <img src={user.userData.avatar} alt={user.userData.username} className="user-button__image" />
           :
             <FontAwesomeIcon icon={faUserCircle} className="user-button__icon" /> } 
         </Link> 
