@@ -6,10 +6,9 @@ import GameDisplay from '../GameDisplay/GameDisplay'
 const Home = () => {
   const [popularGames, setPopularGames] = useState([]);
   const [topRatedGames, setTopRatedGames] = useState([]);
-
-  console.log(process.env.REACT_APP_GAME_SERVER_PATH);
   
   const handleOnLoad = async () => {
+    console.log(process.env);
     const url = process.env.GAME_SERVER_PATH ? process.env.GAME_SERVER_PATH : 'http://localhost:4000';
     const data = await axios.get(`${url}/api/home`);
     setPopularGames(data.data[0].results);
