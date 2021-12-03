@@ -39,7 +39,8 @@ app.post('/users/join', async (req, res) => {
     if(user === 'User already exists') {
       res.status(400).send();
     }
-    res.status(201).json(user);
+    const accessToken = generateAccessToken({email: user.email});
+    res.status(201).json({ accessToken, username: user[0].username, avatar: user[0].avatar });
   } catch {
     res.status(500).send();
   }
@@ -58,7 +59,7 @@ app.post('/users/login', async (req, res) => {
       return res.status(401).send();
     }
     const accessToken = generateAccessToken({email: user.email});
-    res.status(200).json({ accessToken, username: dbUser[0].username });
+    res.status(200).json({ accessToken, username: dbUser[0].username, avatar: dbUser[0].avatar });
   } catch {
     res.status(500).send();
   }

@@ -26,7 +26,7 @@ export const addUser = async userData => {
 export const findByEmail = async userEmail => {
   try {
     const client = await pool.connect();
-    const user = await client.query('SELECT email, password, username FROM "Users"."Users" WHERE email = $1', [userEmail]);
+    const user = await client.query('SELECT * FROM "Users"."Users" WHERE email = $1', [userEmail]);
     client.release();
     return user.rows;
   } catch {

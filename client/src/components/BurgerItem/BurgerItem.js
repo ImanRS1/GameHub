@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { setSearchResults } from '../../slices/slice';
+import { setSearchResults } from '../../slices/SearchSlice';
 import './BurgerItem.css';
 
 const BurgerItem = ({ genre }) => {

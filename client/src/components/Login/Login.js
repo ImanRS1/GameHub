@@ -1,23 +1,36 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../slices/UserSlice';
 import axios from 'axios';
 import './Login.css';
 
 
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const user = {
+    const currentUser = {
       email: e.target.children[0].children[0].value,
       password: e.target.children[1].children[0].value
     };
     
-    const data = await axios.post('http://localhost:5000/users/login', user);
+    const data = await axios.post('http://localhost:5000/users/login', currentUser);
 
-    window.localStorage.setItem('Token', data.data.accessToken);
+    const user = {
+      username: data.data.username,
+      avatar: data.data.avatar,
+    }
+
+    dispatch(
+      setUser({
+        user,
+        accessToken: data.data.accessToken,
+      })
+    );
 
     navigate(`/profile/${data.data.username}`);
   }

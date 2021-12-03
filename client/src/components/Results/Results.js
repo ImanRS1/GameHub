@@ -5,7 +5,7 @@ import GameCard from '../GameCard/GameCard';
 import './Results.css';
 
 const Results = () => {
-  const searchResults = useSelector(state => state.searchResults.searchResults);
+  const searchResults = useSelector(state => state.search.searchResults);
 
   const { query } = useParams();
 

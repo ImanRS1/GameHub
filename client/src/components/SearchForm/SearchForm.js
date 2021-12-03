@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
-import { setSearchQuery, setSearchResults } from '../../slices/slice';
+import { setSearchQuery, setSearchResults } from '../../slices/SearchSlice';
 import './SearchForm.css';
 
 const SearchForm = () => {

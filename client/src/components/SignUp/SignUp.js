@@ -1,14 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../slices/UserSlice';
+
 import './SignUp.css';
 
 const SignUp = () => {
+  const [passMatch, setPassMatch] = useState(true);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async e => {
     e.preventDefault();
 
-    // Confirm password check missing
+    const password = e.target.children[2].children[0].value;
+    const confirmPassword = e.target.children[3].children[0].value;
+
+    if (password !== confirmPassword) {
+      return setPassMatch(false);
+    }
 
     const newUser = {
       username: e.target.children[0].children[0].value,
@@ -16,7 +28,21 @@ const SignUp = () => {
       password: e.target.children[2].children[0].value
     };
     
-    await axios.post('http://localhost:5000/users/join', newUser);
+    const data = await axios.post('http://localhost:5000/users/join', newUser);
+
+    const user = {
+      username: data.data.username,
+      avatar: data.data.avatar,
+    }
+
+    dispatch(
+      setUser({
+        user,
+        accessToken: data.data.accessToken,
+      })
+    );
+
+    navigate(`/profile/${data.data.username}`);
   };
 
   return (
@@ -39,6 +65,7 @@ const SignUp = () => {
           Confirm Password
           <input className="join-form__input" type="password" placeholder="Confirm Password" required />
         </label>
+        <p className={ passMatch ? "hidden" : "error" }>Sorry, your passwords don't match!</p>
         <button className="join-form__button" type="submit">Sign Up</button>
       </form>
       <p className="page-content__sign-in">Already a member? <Link className="sign-in__link" to='/login'>Login</Link></p>

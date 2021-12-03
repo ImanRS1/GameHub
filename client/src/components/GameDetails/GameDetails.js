@@ -18,8 +18,6 @@ const GameDetails = () => {
     getGameInfo(id);
   }, [])
 
-  console.log(gameInfo);
-
   const createMarkup = () => {
     return {__html: gameInfo[0].description}
   }
