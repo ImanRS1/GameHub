@@ -10,7 +10,8 @@ const BurgerItem = ({ genre }) => {
   const navigate = useNavigate();
 
   const getData = async () => {
-    const url = process.env.GAME_SERVER_PATH ? process.env.GAME_SERVER_PATH : 'http://localhost:4000';
+    const urlDev = 'http://localhost:4000';
+    const url = 'https://gamehub-gameserver.herokuapp.com';
 
     const data = await axios.get(`${url}/api/genre/${genre.id}`);
     return data.data;

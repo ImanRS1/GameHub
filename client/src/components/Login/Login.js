@@ -18,7 +18,8 @@ const Login = () => {
       password: e.target.children[1].children[0].value
     };
 
-    const url = process.env.USER_SERVER_PATH ? process.env.USER_SERVER_PATH : 'http://localhost:5000';
+    const urlDev = 'http://localhost:5000';
+    const url = 'http://gamehub-userserver.herokuapp.com';
     
     const data = await axios.post(`${url}/users/login`, currentUser);
 
