@@ -29,7 +29,7 @@ const SignUp = () => {
     };
 
     const urlDev = 'http://localhost:5000';
-    const url = 'http://gamehub-userserver.herokuapp.com';
+    const url = 'https://gamehub-userserver.herokuapp.com';
 
     const data = await axios.post(`${url}/users/join`, newUser);
 
