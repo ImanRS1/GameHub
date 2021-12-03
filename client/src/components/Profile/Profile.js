@@ -1,12 +1,28 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from '../../slices/UserSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router';
 import './Profile.css';
 
 const Profile = () => {
   const user = useSelector(state => state.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = e => {
+    e.preventDefault();
+
+    dispatch(
+      setUser({
+        user: {},
+        accessToken: null,
+      })
+    );
+    navigate('/');
+  };
 
   return (
     <div className="page-content__profile">
@@ -21,7 +37,7 @@ const Profile = () => {
         <p className="info_details">52 games played</p>
         <p className="info_details">75 reviews written</p>
         <p className="info_details">Change password</p>
-        <p className="info_details">Logout (just refresh!)</p>
+        <p className="info_details" onClick={handleLogout}>Logout (just refresh!)</p>
       </div>
     </div>
   );

@@ -75,4 +75,19 @@ app.get('/users/:name', authenticateToken, async (req, res) => {
   }
 });
 
+app.get('/user/:name', authenticateToken, async (req, res) => {
+  try {
+    const { name } = req.params;
+    const userData = await getProfileData(name);
+    res.status(200).send(userData);
+  } catch {
+    res.status(500).send();
+  }
+});
+
+// app.delete('users/logout', (req, res) => {
+//   refreshTokens = refreshTokens.filter(token => token !== req.body.token)
+//   res.sendStatus(204)
+// })
+
 app.listen(process.env.PORT || 5000, () => console.log('App is running on port 5000'));
