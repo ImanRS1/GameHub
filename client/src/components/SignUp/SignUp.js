@@ -27,7 +27,7 @@ const SignUp = () => {
       email: e.target.children[1].children[0].value,
       password: e.target.children[2].children[0].value
     };
-    
+
     const data = await axios.post('http://localhost:5000/users/join', newUser);
 
     const user = {
