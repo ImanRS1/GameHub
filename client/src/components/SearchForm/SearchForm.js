@@ -23,13 +23,16 @@ const SearchForm = () => {
       setSearchQuery(query)
     );
     e.target.reset();
-    const urlDev = 'http://localhost:4000';
-    const url = 'https://gamehub-gameserver.herokuapp.com';
-    const data = await axios.get(`${urlDev}/api/games/${query}`);
-    dispatch(
-      setSearchResults(data.data)
-    );
-    navigate(`/results/${query}`);
+    if (selected === "games") {
+      const urlDev = 'http://localhost:4000';
+      const url = 'https://gamehub-gameserver.herokuapp.com';
+      const data = await axios.get(`${urlDev}/api/games/${query}`);
+      dispatch(
+        setSearchResults(data.data)
+      );
+      navigate(`/results/${query}`);
+    }
+    navigate(`/users/${query}`);
   };
 
   const handleClick = e => {
@@ -39,12 +42,15 @@ const SearchForm = () => {
 
   return (
     <form className="search-bar" onSubmit={handleSubmit}>
-      <input type="text" className="search-bar__input-field" placeholder="Search for something..." onChange={handleChange} />
+      <input type="text" className="search-bar__input-field" placeholder="Search..." onChange={handleChange} />
       <button className={`search-bar__change-button ${selected === "games" ? "selected" : "not-selected"}`} onClick={handleClick} id="games">
         <FontAwesomeIcon icon={faGamepad} className="change-button__icon" />
       </button>
       <button className={`search-bar__change-button ${selected === "users" ? "selected" : "not-selected"}`} onClick={handleClick} id="users">
         <FontAwesomeIcon icon={faUser} className="change-button__icon" />
+      </button>
+      <button type="submit" className="search-bar__submit-button">
+        Search
       </button>
     </form>
   );

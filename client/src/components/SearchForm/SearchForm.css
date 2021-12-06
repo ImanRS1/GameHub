@@ -6,8 +6,9 @@
 }
 
 .search-bar__input-field {
-  width: 12rem;
+  width: 10rem;
   border: none;
+  padding-left: 0.5rem;
   background-color: transparent;
   color: white;
 }
@@ -18,7 +19,6 @@
 
 .search-bar__input-field::placeholder {
   color: lightgray;
-  padding-left: 0.5rem;
 }
 
 .search-bar__change-button {
@@ -38,4 +38,11 @@
 
 .not-selected {
   background-color: rgba(177, 0, 2, 0.3);
+}
+
+.search-bar__submit-button {
+  border: none;
+  background-color: rgba(177, 0, 2, 1);
+  color: #fff;
+  padding: 0.3rem 0.5rem;
 }
