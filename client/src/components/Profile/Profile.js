@@ -24,11 +24,6 @@ const Profile = () => {
     navigate('/');
   };
 
-  const igor = e => {
-    e.preventDefault();
-    navigate('/users/therealigor')
-  }
-
   return (
     <div className="page-content__profile">
       <div className="profile__avatar">
@@ -44,7 +39,6 @@ const Profile = () => {
         { user.accessToken &&
         <button className="info__logout" onClick={handleLogout}>Logout</button>
         }
-        <button className="info__logout" onClick={igor}>IGOT</button>
       </div>
     </div>
   );

@@ -16,6 +16,9 @@ export const addUser = async userData => {
   try {
     const client = await pool.connect();
     const user = await client.query('INSERT INTO "Users"."Users" (username, email, password) VALUES ($1, $2, $3) RETURNING *', [userData.username, userData.email, userData.password]);
+
+    await client.query(`CREATE TABLE "Users"."${userData.username}" (id serial PRIMARY KEY, gameId INT UNIQUE NOT NULL, gameName VARCHAR (255) NOT NULL, status VARCHAR (50) NOT NULL)`);
+
     client.release();
     return user.rows;
   } catch {
@@ -42,5 +45,20 @@ export const getProfileData = async username => {
     return user.rows;
   } catch {
     return 'Ooops, something went wrong';
+  }
+};
+
+export const fetchGameList = async username => {
+  try {
+    const client = await pool.connect();
+
+    const games = await client.query(`SELECT * FROM "Users"."${username}"`);
+    if (!games) {
+      console.log('no games');
+    }
+    client.release();
+    return user.rows;
+  } catch {
+    return 'Ooops, something went REALLY wrong';
   }
 }

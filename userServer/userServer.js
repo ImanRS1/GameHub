@@ -1,6 +1,6 @@
 import express from 'express';
 import { config } from 'dotenv';
-import { addUser, findByEmail, getProfileData } from './db.js';
+import { addUser, findByEmail, getProfileData, fetchGameList } from './db.js';
 import cors from 'cors';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -75,6 +75,17 @@ app.get('/users/:name', async (req, res) => {
   }
 });
 
+app.get('/user/games/:name', async (req, res) => {
+  try {
+    const { name } = req.params;
+    const userData = await fetchGameList(name);
+    res.status(200).send(userData);
+  } catch {
+    res.status(500).send();
+  }     
+}); //get games list
+    // .post(addToGameList) to add game to list
+
 // app.get('/user/:name', authenticateToken, async (req, res) => {
 //   try {
 //     const { name } = req.params;
@@ -90,4 +101,4 @@ app.get('/users/:name', async (req, res) => {
 //   res.sendStatus(204)
 // })
 
-app.listen(process.env.PORT || 6000, () => console.log('App is running on port 6000'));
+app.listen(process.env.PORT || 8080, () => console.log('App is running on port 8080'));
