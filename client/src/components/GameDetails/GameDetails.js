@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios';
+import LoadingFrame from '../LoadingFrame/LoadingFrame'
 import './GameDetails.css';
 
 const GameDetails = () => {
@@ -27,7 +28,7 @@ const GameDetails = () => {
 
   return (
     <div className="page-content__game-container">
-      {gameInfo.length === 0 && <p>Loading...</p>}
+      {gameInfo.length === 0 && <LoadingFrame />}
       {gameInfo.length > 0 && (
         <>
           <img className="game-container__image" src={gameInfo[2] ? gameInfo[2].image : gameInfo[0].background} alt={gameInfo[0].name}/>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faGamepad, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
 import { setSearchQuery, setSearchResults } from '../../slices/SearchSlice';
 import './SearchForm.css';
@@ -10,6 +10,7 @@ import './SearchForm.css';
 const SearchForm = () => {
   const dispatch = useDispatch();
   const [query, setQuery] = useState();
+  const [selected, setSelected] = useState("games");
   const navigate = useNavigate();
 
   const handleChange = e => {
@@ -31,12 +32,20 @@ const SearchForm = () => {
     navigate(`/results/${query}`);
   };
 
+  const handleClick = e => {
+    e.preventDefault();
+    setSelected(e.target.closest("button").id);
+  };
+
   return (
     <form className="search-bar" onSubmit={handleSubmit}>
-      <button type="submit" className="search-bar__submit-button">
-        <FontAwesomeIcon icon={faSearch} className="submit-button__icon" />
+      <input type="text" className="search-bar__input-field" placeholder="Search for something..." onChange={handleChange} />
+      <button className={`search-bar__change-button ${selected === "games" ? "selected" : "not-selected"}`} onClick={handleClick} id="games">
+        <FontAwesomeIcon icon={faGamepad} className="change-button__icon" />
       </button>
-      <input type="text" className="search-bar__input-field" placeholder="Search game..." onChange={handleChange} />
+      <button className={`search-bar__change-button ${selected === "users" ? "selected" : "not-selected"}`} onClick={handleClick} id="users">
+        <FontAwesomeIcon icon={faUser} className="change-button__icon" />
+      </button>
     </form>
   );
 };

@@ -5,19 +5,8 @@
   margin-top: 1rem;
 }
 
-.search-bar__submit-button {
-  border: none;
-  background-color: transparent;
-  color: #fff;
-  padding: 0.3rem 0.7rem 0.3rem 0.3rem;
-}
-
-.submit-button__icon {
-  cursor: pointer;
-}
-
 .search-bar__input-field {
-  width: 15rem;
+  width: 12rem;
   border: none;
   background-color: transparent;
   color: white;
@@ -29,4 +18,24 @@
 
 .search-bar__input-field::placeholder {
   color: lightgray;
+  padding-left: 0.5rem;
+}
+
+.search-bar__change-button {
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  padding: 0.3rem 0.5rem;
+}
+
+.change-button__icon {
+  cursor: pointer;
+}
+
+.selected {
+  background-color: rgba(177, 0, 2, 1);
+}
+
+.not-selected {
+  background-color: rgba(177, 0, 2, 0.3);
 }
