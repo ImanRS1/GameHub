@@ -37,23 +37,6 @@
   flex-direction: column;
 }
 
-.info__details {
+.info_details {
   padding-top: 0.5rem;
-}
-
-.info__logout {
-  width: 9rem;
-  background-color: #b10002;
-  border: 1px solid #b10002;
-  border-radius: 4px;
-  padding: 0.3rem;
-  color: white;
-  font-weight: bold;
-  margin-top: 1.5rem;
-}
-
-.info__logout:hover {
-  background-color: rgba(177, 0, 2, 0.8);
-  border: 1px solid rgba(177, 0, 2, 0.8);
-  cursor: pointer;
 }

@@ -21,7 +21,7 @@ const Login = () => {
     const urlDev = 'http://localhost:5000';
     const url = 'https://gamehub-userserver.herokuapp.com';
     
-    const data = await axios.post(`${url}/user/login`, currentUser);
+    const data = await axios.post(`${urlDev}/users/login`, currentUser);
 
     const user = {
       username: data.data.username,

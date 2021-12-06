@@ -65,7 +65,7 @@ app.post('/users/login', async (req, res) => {
   }
 });
 
-app.get('/users/:name', authenticateToken, async (req, res) => {
+app.get('/users/:name', async (req, res) => {
   try {
     const { name } = req.params;
     const userData = await getProfileData(name);
@@ -75,15 +75,15 @@ app.get('/users/:name', authenticateToken, async (req, res) => {
   }
 });
 
-app.get('/user/:name', authenticateToken, async (req, res) => {
-  try {
-    const { name } = req.params;
-    const userData = await getProfileData(name);
-    res.status(200).send(userData);
-  } catch {
-    res.status(500).send();
-  }
-});
+// app.get('/user/:name', authenticateToken, async (req, res) => {
+//   try {
+//     const { name } = req.params;
+//     const userData = await getProfileData(name);
+//     res.status(200).send(userData);
+//   } catch {
+//     res.status(500).send();
+//   }
+// });
 
 // app.delete('users/logout', (req, res) => {
 //   refreshTokens = refreshTokens.filter(token => token !== req.body.token)

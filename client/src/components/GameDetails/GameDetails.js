@@ -13,7 +13,7 @@ const GameDetails = () => {
     const urlDev = 'http://localhost:4000';
     const url = 'https://gamehub-gameserver.herokuapp.com';
 
-    const data = await axios.get(`${url}/api/game/${gameId}`);
+    const data = await axios.get(`${urlDev}/api/game/${gameId}`);
     setGameInfo(data.data);
   }
 

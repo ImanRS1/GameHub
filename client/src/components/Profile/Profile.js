@@ -24,6 +24,11 @@ const Profile = () => {
     navigate('/');
   };
 
+  const igor = e => {
+    e.preventDefault();
+    navigate('/users/therealigor')
+  }
+
   return (
     <div className="page-content__profile">
       <div className="profile__avatar">
@@ -33,11 +38,13 @@ const Profile = () => {
             <FontAwesomeIcon icon={faUserCircle} className="profile__icon" /> } 
       </div>
       <div className="profile__info">
-        <h2 className="info_username">{user.userData.username}</h2>
-        <p className="info_details">52 games played</p>
-        <p className="info_details">75 reviews written</p>
-        <p className="info_details">Change password</p>
-        <p className="info_details" onClick={handleLogout}>Logout (just refresh!)</p>
+        <h2 className="info__username">{user.userData.username}</h2>
+        <p className="info__details">Games played: 52</p>
+        <p className="info__details">Reviews written: 75</p>
+        { user.accessToken &&
+        <button className="info__logout" onClick={handleLogout}>Logout</button>
+        }
+        <button className="info__logout" onClick={igor}>IGOT</button>
       </div>
     </div>
   );

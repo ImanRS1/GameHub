@@ -24,7 +24,7 @@ const SearchForm = () => {
     e.target.reset();
     const urlDev = 'http://localhost:4000';
     const url = 'https://gamehub-gameserver.herokuapp.com';
-    const data = await axios.get(`${url}/api/games/${query}`);
+    const data = await axios.get(`${urlDev}/api/games/${query}`);
     dispatch(
       setSearchResults(data.data)
     );

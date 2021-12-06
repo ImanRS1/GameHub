@@ -8,6 +8,7 @@ import GameDetails from './components/GameDetails/GameDetails';
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
 import Profile from './components/Profile/Profile';
+import PublicProfile from './components/PublicProfile/PublicProfile';
 import './App.css';
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="/category/:query" element={<Results />} />
             <Route path="/game/:id" element={<GameDetails />} />
             <Route path="/profile/:name" element={<Profile />} />
+            <Route path="/users/:name" element={<PublicProfile />} />
             <Route path="/login" element={<Login />} />
             <Route path="/join" element={<SignUp />} />
           </Routes>

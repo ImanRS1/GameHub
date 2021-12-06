@@ -13,7 +13,7 @@ const BurgerItem = ({ genre }) => {
     const urlDev = 'http://localhost:4000';
     const url = 'https://gamehub-gameserver.herokuapp.com';
 
-    const data = await axios.get(`${url}/api/genre/${genre.id}`);
+    const data = await axios.get(`${urlDev}/api/genre/${genre.id}`);
     return data.data;
   }
 
