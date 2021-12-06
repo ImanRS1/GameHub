@@ -22,6 +22,7 @@
 }
 
 .search-bar__change-button {
+  width: 2rem;
   border: none;
   background-color: transparent;
   color: #fff;
@@ -41,8 +42,10 @@
 }
 
 .search-bar__submit-button {
+  width: 4rem;
   border: none;
   background-color: rgba(177, 0, 2, 1);
   color: #fff;
   padding: 0.3rem 0.5rem;
+  font-weight: bold;
 }

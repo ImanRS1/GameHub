@@ -28,7 +28,7 @@ const GameDetails = () => {
 
   return (
     <div className="page-content__game-container">
-      {gameInfo.length === 0 && <LoadingFrame />}
+      {/* {gameInfo.length === 0 && <LoadingFrame />} */}
       {gameInfo.length > 0 && (
         <>
           <img className="game-container__image" src={gameInfo[2] ? gameInfo[2].image : gameInfo[0].background} alt={gameInfo[0].name}/>
@@ -38,16 +38,32 @@ const GameDetails = () => {
             <p className="details__info">Release date: {gameInfo[0].year}</p>
             <p className="details__info">Platforms: {gameInfo[0].platforms}</p>
             <p className="details__info">Genres: {gameInfo[0].genres}</p>
-            {/* <p>{gameInfo[2].videos}</p> */}
             <p className="details__info">Main Story: {gameInfo[1] && gameInfo[1].gameplayMain}h</p>
             <p className="details__info">Main Story + Extras: {gameInfo[1] && gameInfo[1].gameplayMainExtra}h</p>
             <p className="details__info">Completionist: {gameInfo[1] && gameInfo[1].gameplayCompletionist}h</p>
           </div>
         </>
-      
-      
-      
-      
+      )}
+      {gameInfo.length === 0 && (
+        <>
+          <div className="game-container__button-container">
+            <button className="button-container__mark-button selected">Played</button>
+            <button className="button-container__mark-button not-selected">Playing</button>
+            <button className="button-container__mark-button not-selected">Will play</button>
+          </div>
+          <img className="game-container__image" src="https://i1.sndcdn.com/artworks-000026688925-b992wq-t500x500.jpg" alt="Skyrim"/>
+          <div className="game-container__details">
+            <h2 className="details__name">Skyrim</h2>
+            <p className="details__info" id="description">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+            <p className="details__info">Release date: 2008</p>
+            <p className="details__info">Platforms: PS4PC</p>
+            <p className="details__info">Genres: RPG</p>
+            <p className="details__info">Main Story: 40h</p>
+            <p className="details__info">Main Story + Extras: 130h</p>
+            <p className="details__info">Completionist: 200h</p>
+            <p className="details__info">Rating: 4.8</p>
+          </div>
+        </>
       )}
     </div>
   );
