@@ -90,4 +90,4 @@ app.get('/users/:name', async (req, res) => {
 //   res.sendStatus(204)
 // })
 
-app.listen(process.env.PORT || 5000, () => console.log('App is running on port 5000'));
+app.listen(process.env.PORT || 6000, () => console.log('App is running on port 6000'));

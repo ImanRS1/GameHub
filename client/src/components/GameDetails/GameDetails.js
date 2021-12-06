@@ -47,9 +47,9 @@ const GameDetails = () => {
       {gameInfo.length === 0 && (
         <>
           <div className="game-container__button-container">
-            <button className="button-container__mark-button selected">Played</button>
-            <button className="button-container__mark-button not-selected">Playing</button>
-            <button className="button-container__mark-button not-selected">Will play</button>
+            <button className="button-container__mark-button not-selected" id="played">Played</button>
+            <button className="button-container__mark-button not-selected" id="playing">Playing</button>
+            <button className="button-container__mark-button not-selected" id="wish">Will play</button>
           </div>
           <img className="game-container__image" src="https://i1.sndcdn.com/artworks-000026688925-b992wq-t500x500.jpg" alt="Skyrim"/>
           <div className="game-container__details">
