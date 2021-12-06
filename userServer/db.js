@@ -53,12 +53,44 @@ export const fetchGameList = async username => {
     const client = await pool.connect();
 
     const games = await client.query(`SELECT * FROM "Users"."${username}"`);
-    if (!games) {
+    if (!games.rows) {
       console.log('no games');
     }
     client.release();
     return user.rows;
   } catch {
     return 'Ooops, something went REALLY wrong';
+  }
+};
+
+export const updateGameList = async (username, gameId, gameName, status) => {
+  try {
+    const client = await pool.connect();
+    const updatedGame = await client.query(`SELECT * FROM "Users"."${username}" WHERE gameid = $1`, [gameId]);
+    if (updatedGame.rows.length === 0) {
+      await client.query(`INSERT INTO "Users"."${username}" (gameid, gamename, status) VALUES ($1, $2, $3)`, [gameId, gameName, status]);
+      client.release();
+      return;
+    }
+    await client.query(`UPDATE "Users"."${username}" SET status = $1`, [status]);
+    client.release();
+    return;
+  } catch {
+    return 'Ooops, something went SUPER wrong';
+  }
+}
+
+export const getGameStatus = async (username, gameId) => {
+  try {
+    const client = await pool.connect();
+    const gameStatus = await client.query(`SELECT * FROM "Users"."${username}" WHERE gameid = $1`, [gameId]);
+    if (gameStatus.rows.length === 0) {
+      client.release();
+      return;
+    }
+    client.release();
+    return gameStatus.rows[0].status;
+  } catch {
+    return 'Ooops, something went very very wrong';
   }
 }

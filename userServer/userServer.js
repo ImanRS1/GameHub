@@ -1,6 +1,6 @@
 import express from 'express';
 import { config } from 'dotenv';
-import { addUser, findByEmail, getProfileData, fetchGameList } from './db.js';
+import { addUser, findByEmail, getProfileData, fetchGameList, updateGameList, getGameStatus } from './db.js';
 import cors from 'cors';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -83,7 +83,31 @@ app.get('/user/games/:name', async (req, res) => {
   } catch {
     res.status(500).send();
   }     
-}); //get games list
+}); 
+
+app.put('/user/addgame', async (req, res) => {
+  try {
+    const { username, gameId, gameName, status } = req.body;
+    await updateGameList(username, gameId, gameName, status);
+    res.status(200).send();
+  } catch {
+    res.status(500).send();
+  }
+});
+
+app.post('/user/game-status', async (req, res) => {
+  try {
+    const { username, gameId } = req.body;
+    const status = await getGameStatus(username, gameId);
+    res.status(200).send(status);
+  } catch {
+    res.status(500).send();
+  }
+})
+
+
+
+//get games list
     // .post(addToGameList) to add game to list
 
 // app.get('/user/:name', authenticateToken, async (req, res) => {

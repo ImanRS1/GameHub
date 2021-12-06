@@ -24,6 +24,11 @@ const Profile = () => {
     navigate('/');
   };
 
+  const move = e => {
+    e.preventDefault();
+    navigate('/game/123');
+  }
+
   return (
     <div className="page-content__profile">
       <div className="profile__avatar">
@@ -39,6 +44,7 @@ const Profile = () => {
         { user.accessToken &&
         <button className="info__logout" onClick={handleLogout}>Logout</button>
         }
+        <button onClick={move}>Magic button</button>
       </div>
     </div>
   );

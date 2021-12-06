@@ -1,21 +1,50 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import LoadingFrame from '../LoadingFrame/LoadingFrame'
 import './GameDetails.css';
 
 const GameDetails = () => {
   const [gameInfo, setGameInfo] = useState([]);
+  const [gameStatus, setGameStatus] = useState();
 
   const { id } = useParams();
+
+  const user = useSelector(state => state.user);
+  const username = user.userData.username;
+
+  const getGameStatus = async (username, gameId) => {
+    const urlDev = 'http://localhost:8080';
+    const url = 'https://gamehub-userserver.herokuapp.com';
+    const status = await axios.post(`${urlDev}/user/game-status`, { username, gameId });
+    return status;
+  }
   
   const getGameInfo = async gameId => {
     const urlDev = 'http://localhost:4000';
     const url = 'https://gamehub-gameserver.herokuapp.com';
-
-    const data = await axios.get(`${urlDev}/api/game/${gameId}`);
-    setGameInfo(data.data);
+    // const data = await axios.get(`${urlDev}/api/game/${gameId}`);
+    // setGameInfo(data.data);
+    const status = await getGameStatus(username, gameId);
+    if (!status.data) {
+      return;
+    }
+    setGameStatus(status.data);
+  }
+  
+  const handleClick = async e => {
+    e.preventDefault();
+    setGameStatus(e.target.id);
+    const urlDev = 'http://localhost:8080';
+    const url = 'https://gamehub-userserver.herokuapp.com';
+    await axios.put(`${urlDev}/user/addgame`, {
+      username,
+      gameId: id,
+      gameName: "Skyrim", //CHANGE THIS
+      status: e.target.id,
+    })
   }
 
   useEffect(() => {
@@ -46,11 +75,13 @@ const GameDetails = () => {
       )}
       {gameInfo.length === 0 && (
         <>
+          { user.userData.username &&
           <div className="game-container__button-container">
-            <button className="button-container__mark-button not-selected" id="played">Played</button>
-            <button className="button-container__mark-button not-selected" id="playing">Playing</button>
-            <button className="button-container__mark-button not-selected" id="wish">Will play</button>
+            <button className={`button-container__mark-button ${gameStatus === "played" ? "selected" : "not-selected"}`} id="played" onClick={handleClick}>Played</button>
+            <button className={`button-container__mark-button ${gameStatus === "playing" ? "selected" : "not-selected"}`} id="playing" onClick={handleClick}>Playing</button>
+            <button className={`button-container__mark-button ${gameStatus === "wish" ? "selected" : "not-selected"}`} id="wish" onClick={handleClick}>Will play</button>
           </div>
+          }
           <img className="game-container__image" src="https://i1.sndcdn.com/artworks-000026688925-b992wq-t500x500.jpg" alt="Skyrim"/>
           <div className="game-container__details">
             <h2 className="details__name">Skyrim</h2>
