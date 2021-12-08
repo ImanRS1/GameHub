@@ -19,16 +19,16 @@ const GameDetails = () => {
   const username = user.userData.username;
 
   const getGameStatus = async (username, gameId) => {
-    const urlDev = 'http://localhost:8123';
-    // const url = 'https://gamehub-userserver.herokuapp.com';
-    const status = await axios.post(`${urlDev}/user/game-status`, { username, gameId });
+    // const urlDev = 'http://localhost:8123';
+    const url = 'https://gamehub-userserver.herokuapp.com';
+    const status = await axios.post(`${url}/user/game-status`, { username, gameId });
     return status;
   }
   
   const getGameInfo = async gameId => {
-    const urlDev = 'http://localhost:4123';
-    // const url = 'https://gamehub-gameserver.herokuapp.com';
-    const data = await axios.get(`${urlDev}/api/game/${gameId}`);
+    // const urlDev = 'http://localhost:4123';
+    const url = 'https://gamehub-gameserver.herokuapp.com';
+    const data = await axios.get(`${url}/api/game/${gameId}`);
     data.data.reviews = data.data.reviews.reverse();
     setGameInfo(data.data);
     const status = await getGameStatus(username, gameId);
@@ -41,9 +41,9 @@ const GameDetails = () => {
   const handleClick = async e => {
     e.preventDefault();
     setGameStatus(e.target.id);
-    const urlDev = 'http://localhost:8123';
-    // const url = 'https://gamehub-userserver.herokuapp.com';
-    await axios.put(`${urlDev}/user/addgame`, {
+    // const urlDev = 'http://localhost:8123';
+    const url = 'https://gamehub-userserver.herokuapp.com';
+    await axios.put(`${url}/user/addgame`, {
       username,
       gameId: id,
       gameName: gameInfo.name, 
