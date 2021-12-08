@@ -19,6 +19,7 @@
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.1",
     "react-select": "^5.2.1",
+    "react-svg-star-rating": "^2.1.1",
     "redux": "^4.1.2",
     "web-vitals": "^1.0.1"
   },

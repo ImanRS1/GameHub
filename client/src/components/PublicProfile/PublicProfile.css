@@ -40,3 +40,22 @@
 .info_details {
   padding-top: 0.5rem;
 }
+
+.page-content__profile-games {
+  padding-top: 1rem;
+}
+
+.profile-games__title {
+  padding: 0 0 0.5rem 0.5rem;
+  font-size: 1.2rem;
+}
+
+.profile-games__played,
+.profile-games__wish,
+.profile-games__playing {
+  margin-bottom: 0.5rem;
+  background-color: rgba(177, 0, 2, 0.5);
+  padding: 0.5rem;
+  height: 12rem;
+  overflow: scroll;
+}

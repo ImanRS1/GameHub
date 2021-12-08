@@ -8,8 +8,8 @@ const Home = () => {
   const [topRatedGames, setTopRatedGames] = useState([]);
   
   const handleOnLoad = async () => {
-    const urlDev = 'http://localhost:4000';
-    const url = 'https://gamehub-gameserver.herokuapp.com';
+    const urlDev = 'http://localhost:4123';
+    // const url = 'https://gamehub-gameserver.herokuapp.com';
     const data = await axios.get(`${urlDev}/api/home`);
     setPopularGames(data.data[0].results);
     setTopRatedGames(data.data[1].results);

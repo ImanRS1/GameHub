@@ -19,18 +19,18 @@ const SearchForm = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    e.target.reset();
     dispatch(
       setSearchQuery(query)
     );
-    e.target.reset();
     if (selected === "games") {
-      const urlDev = 'http://localhost:4000';
-      const url = 'https://gamehub-gameserver.herokuapp.com';
+      const urlDev = 'http://localhost:4123';
+      // const url = 'https://gamehub-gameserver.herokuapp.com';
       const data = await axios.get(`${urlDev}/api/games/${query}`);
       dispatch(
         setSearchResults(data.data)
       );
-      navigate(`/results/${query}`);
+      return navigate(`/results/${query}`);
     }
     navigate(`/users/${query}`);
   };

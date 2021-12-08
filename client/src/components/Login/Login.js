@@ -18,8 +18,8 @@ const Login = () => {
       password: e.target.children[1].children[0].value
     };
 
-    const urlDev = 'http://localhost:8080';
-    const url = 'https://gamehub-userserver.herokuapp.com';
+    const urlDev = 'http://localhost:8123';
+    // const url = 'https://gamehub-userserver.herokuapp.com';
     
     const data = await axios.post(`${urlDev}/users/login`, currentUser);
 
