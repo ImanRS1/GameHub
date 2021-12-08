@@ -11,18 +11,25 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
-app.use((req, res, next) => {
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+//   next();
+// });
+
+const corsCaller = (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   next();
-});
+};
 
 app.get('/api/games/:searchQuery', getGames);
 app.get('/api/home', getHomeData);
 app.get('/api/genres', getGenres);
 app.get('/api/genre/:id', getGameByGenre);
-app.get('/api/game/:id', getOneGame);
+app.get('/api/game/:id', corsCaller, getOneGame);
 app.put('/api/game/:id', updateRating);
 app.put('/api/review/:id', updateReview);
 app.post('/api/profile-games', getProfileGames);
