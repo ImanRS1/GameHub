@@ -116,3 +116,10 @@
 .right__star:first-child {
   margin-left: 0.5rem;
 }
+
+.page-content__loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}

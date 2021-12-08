@@ -8,7 +8,7 @@ import ProfileGame from '../ProfileGame/ProfileGame';
 import './PublicProfile.css';
 
 const PublicProfile = () => {
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] = useState([]);
   const [played, setPlayed] = useState([]);
   const [wish, setWish] = useState([]);
   const [playing, setPlaying] = useState([]);
@@ -21,7 +21,9 @@ const PublicProfile = () => {
   const getData = async () => {
     const data = await axios.get(`${url}/users/${name}`);
     if (data.data.length > 0 && data.data !== 'Ooops, something went wrong') {
-      return setUserData(data.data[0]);
+      setUserData(data.data[0]);
+      await handleLoad();
+      return;
     }
     setUserData('No user to match your search!');
   };
@@ -29,7 +31,6 @@ const PublicProfile = () => {
   const getGameData = async ids => {
     // const urlDev = 'http://localhost:4123';
     const url = 'https://gamehub-gameserver.herokuapp.com';
-
     const gameData = await axios.post(`${url}/api/profile-games`, {idArray: ids});
     return gameData.data;
   }
@@ -43,11 +44,9 @@ const PublicProfile = () => {
     }
 
     const userGames = await axios.get(`${url}/user/${name}`);
-
     if (!userGames.data) {
       return;
     };
-
     
     const playedGames = userGames.data.filter(game => game.status === 'played');
     const playedData = await getGameData(playedGames.map(game => game.gameid));
@@ -62,9 +61,7 @@ const PublicProfile = () => {
 
   useEffect(() => {
     getData();
-    handleLoad();
   }, [name]);
-
 
   return (
     <div>

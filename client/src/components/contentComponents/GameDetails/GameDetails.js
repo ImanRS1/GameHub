@@ -6,6 +6,7 @@ import Review from '../Review/Review';
 import axios from 'axios';
 import StarRating from 'react-svg-star-rating';
 import ReviewForm from '../ReviewForm/ReviewForm';
+import LoadingAnimation from '../../LoadingAnimation/LoadingAnimation';
 import './GameDetails.css';
 
 const GameDetails = () => {
@@ -79,7 +80,11 @@ const GameDetails = () => {
 
   return (
     <div className="page-content__game-container">
-      {gameInfo && (
+      {!gameInfo ? 
+      <div className="page-content__loader">
+      <LoadingAnimation />
+      </div>
+      : (
         <>
           {username && (
           <div className="game-container__button-container">
