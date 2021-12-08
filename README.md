@@ -1,3 +1,3 @@
 # GameHub
 
-## A future social media for gamers!
+## A future social medium for gamers!

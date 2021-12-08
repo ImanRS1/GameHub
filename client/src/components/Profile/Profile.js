@@ -76,7 +76,6 @@ const Profile = () => {
           <p className="info__details">Games played: {played.length}</p>
           <p className="info__details">Games playing: {playing.length}</p>
           <p className="info__details">Wish to play: {wish.length}</p>
-          <p className="info__details">Reviews written: 0</p>
           { user.accessToken &&
           <button className="info__logout" onClick={handleLogout}>Logout</button>
           }

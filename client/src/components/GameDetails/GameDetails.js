@@ -2,12 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
+import Review from '../Review/Review';
 import axios from 'axios';
 import StarRating from 'react-svg-star-rating';
 import './GameDetails.css';
 
 const GameDetails = () => {
-  const [gameInfo, setGameInfo] = useState([]);
+  const [gameInfo, setGameInfo] = useState();
   const [gameStatus, setGameStatus] = useState();
 
   const { id } = useParams();
@@ -69,11 +70,13 @@ const GameDetails = () => {
     <div className="page-content__game-container">
       {gameInfo && (
         <>
+          {username && (
           <div className="game-container__button-container">
             <button className={`button-container__mark-button ${gameStatus === "played" ? "selected" : "not-selected"}`} id="played" onClick={handleClick}>Played</button>
             <button className={`button-container__mark-button ${gameStatus === "playing" ? "selected" : "not-selected"}`} id="playing" onClick={handleClick}>Playing</button>
             <button className={`button-container__mark-button ${gameStatus === "wish" ? "selected" : "not-selected"}`} id="wish" onClick={handleClick}>Will play</button>
           </div>
+          )}
           <img className="game-container__image" src={gameInfo.image ? gameInfo.image : gameInfo.background} alt={gameInfo.name}/>
           <div className="game-container__details">
             <h2 className="details__name">{gameInfo.name}</h2>
@@ -81,14 +84,31 @@ const GameDetails = () => {
             <p className="details__info">Release date: {gameInfo.year}</p>
             <p className="details__info">Platforms: {gameInfo.platforms}</p>
             <p className="details__info">Genres: {gameInfo.genres}</p>
-            <p className="details__info">Main Story: {gameInfo.gameplayMain && gameInfo.gameplayMain}h</p>
-            <p className="details__info">Main Story + Extras: {gameInfo.gameplayMainExtra && gameInfo.gameplayMainExtra}h</p>
-            <p className="details__info">Completionist: {gameInfo.gameplayCompletionist && gameInfo.gameplayCompletionist}h</p>
+            { gameInfo.gameplayMain && gameInfo.gameplayMain !== 0 ?
+            <p className="details__info">Main Story: {gameInfo.gameplayMain}h</p>
+            : "" }
+            { gameInfo.gameplayMainExtra && gameInfo.gameplayMainExtra !== 0 ?
+            <p className="details__info">Main Story + Extras: {gameInfo.gameplayMainExtra}h</p>
+            : "" }
+            { gameInfo.gameplayCompletionist && gameInfo.gameplayCompletionist !== 0 ?
+            <p className="details__info">Completionist: {gameInfo.gameplayCompletionist}h</p>
+            : "" }
+            {!isNaN(getRating()) && (
             <p>Rating:
               <StarRating activeColor="#ffffff" emptyColor="#292929" hoverColor="#ffffff" starClassName="right__star" initialRating={getRating()} isReadOnly={true} />
             </p>
+            )}
           </div>
         </>
+      )}
+      { gameInfo && (
+        <div className="game-container__game-reviews">
+          <h3>Game reviews</h3>
+          {
+            gameInfo.reviews.length > 0 ? 
+            gameInfo.reviews.map(review => <Review key={review.user} review={review} rating={gameInfo.ratings.find(rating => rating.user === review.user)} />) : <p>No reviews yet...</p>
+          }
+        </div>
       )}
     </div>
   );

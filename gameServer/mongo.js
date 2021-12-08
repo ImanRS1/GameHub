@@ -10,6 +10,7 @@ const client = new MongoClient(uri);
 const createGame = async game => {
   await client.connect();
   game.ratings = [];
+  game.reviews = [];
   await client.db("GameHub").collection("games").insertOne(game);
   await client.close();
 };
@@ -19,11 +20,11 @@ export const getOneGame = async (req, res) => {
     const { id } = req.params;
     await client.connect();
     let game = await client.db("GameHub").collection("games").findOne({ id: parseInt(id, 10) });
-    await client.close();
     if (!game) {
       game = await getGameInfo(id);
       await createGame(game);
     }
+    await client.close();
     res.status(200).send(game);
   } catch (err) {
     console.log(err);
@@ -33,13 +34,13 @@ export const getOneGame = async (req, res) => {
 export const getProfileGames = async (req, res) => {
   try {
     const { idArray } = req.body;
+    await client.connect();
     const games = await Promise.all(idArray.map(async id => {
-      await client.connect();
       const game = await client.db("GameHub").collection("games").findOne({ id });
       const info = {id: game.id, name: game.name, background: game.background, ratings: game.ratings};
-      await client.close();
       return info;
     }));
+    await client.close();
     res.status(200).send(games);
   } catch (err) {
     console.log(err);
@@ -57,4 +58,3 @@ export const updateRating = async (req, res) => {
     console.log(err);
   } 
 };
-

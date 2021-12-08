@@ -52,12 +52,12 @@ export const getHomeData = async (req, res) => {
   const currentMonth = getCurrentMonth();
   const currentDay = getCurrentDay();
   const currentDate = `${currentYear}-${currentMonth}-${currentDay}`;
+  const lastMonth = `${currentYear}-${currentMonth === '01' ? '12' : currentMonth-1}-${currentDay}`;
   const lastYear = `${currentYear-1}-${currentMonth}-${currentDay}`;
-  const lastTenYears = `${currentYear-10}-${currentMonth}-${currentDay}`;
 
-  const data = await axios.get(`${baseUrlRAWG}games?dates=${lastYear},${currentDate}&ordering=-rating&page_size=10&key=${process.env.RAWG_KEY}`);
+  const data = await axios.get(`${baseUrlRAWG}games?dates=${lastMonth},${currentDate}&ordering=-rating&page_size=10&key=${process.env.RAWG_KEY}`);
   const popularGames = data.data;
-  const result = await axios.get(`${baseUrlRAWG}games?dates=${lastTenYears},${currentDate}&page_size=10&metacritic=90,100&key=${process.env.RAWG_KEY}`);
+  const result = await axios.get(`${baseUrlRAWG}games?dates=${lastYear},${currentDate}&page_size=10&metacritic=85,100&key=${process.env.RAWG_KEY}`);
   const topRatedGames = result.data;
 
   res.status(200).send([popularGames, topRatedGames]);

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios';
@@ -19,7 +20,7 @@ const PublicProfile = () => {
   
   const getData = async () => {
     const data = await axios.get(`${urlDev}/users/${name}`);
-    if (data.data.length > 0) {
+    if (data.data.length > 0 && data.data !== 'Ooops, something went wrong') {
       return setUserData(data.data[0]);
     }
     setUserData('No user to match your search!');
@@ -36,6 +37,10 @@ const PublicProfile = () => {
   const handleLoad = async () => {
     const urlDev = 'http://localhost:8123';
     // const url = 'https://gamehub-userserver.herokuapp.com';
+
+    if (userData === 'No user to match your search!' || userData === undefined) {
+      return;
+    }
 
     const userGames = await axios.get(`${urlDev}/user/${name}`);
 
@@ -78,7 +83,6 @@ const PublicProfile = () => {
               <p className="info__details">Games played: {played.length}</p>
               <p className="info__details">Games playing: {playing.length}</p>
               <p className="info__details">Wish to play: {wish.length}</p>
-              <p className="info__details">Reviews written: 0</p>
             </div>
           </div>
           <div className="page-content__profile-games">
@@ -106,7 +110,7 @@ const PublicProfile = () => {
           </div>
         </>
         :
-        <h2>{userData}</h2>
+        <h2 className="no-user">{userData}</h2>
       }
     </div>
   );

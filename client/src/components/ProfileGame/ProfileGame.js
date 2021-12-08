@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import StarRating from 'react-svg-star-rating';
 import axios from 'axios';
 import './ProfileGame.css';
@@ -10,11 +9,10 @@ const ProfileGame = ({ game }) => {
   const navigate = useNavigate();
   const [rating, setRating] = useState(0);
 
-  const user = useSelector(state => state.user);
-  const username = user.userData.username;
+  const { name } = useParams();
 
   const handleLoad = async () => {
-    const userRating = game.ratings.filter(rating => rating.user === username)[0];
+    const userRating = game.ratings.filter(rating => rating.user === name)[0];
     if(!userRating) {
       return;
     }
@@ -26,7 +24,7 @@ const ProfileGame = ({ game }) => {
     const urlDev = 'http://localhost:4123';
     // const url = 'https://gamehub-gameserver.herokuapp.com';
     setRating(rating);
-    await axios.put(`${urlDev}/api/game/${game.id}`, { rating, id: game.id, username: username });
+    await axios.put(`${urlDev}/api/game/${game.id}`, { rating, id: game.id, username: name });
   };
 
   const handleClick = e => {

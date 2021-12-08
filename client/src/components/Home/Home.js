@@ -24,11 +24,11 @@ const Home = () => {
       <div className="page-content__slogan-container">
         <h2 className="slogan-container__slogan">All games.<br/>Your voices.<br/>One Platform.</h2>
       </div>
-      <p className="page-content__info">Today's most popular games</p>
+      <p className="page-content__info">This months most popular games</p>
       <div className="page-content__trending-container">
         {popularGames.length > 0 && popularGames.map(game => <GameDisplay key={game.name} game={game} />)}
       </div>
-      <p className="page-content__info">Top reviewed today</p>
+      <p className="page-content__info">Top rated of the year</p>
       <div className="page-content__reviewed-container">
         {topRatedGames.length > 0 && topRatedGames.map(game => <GameDisplay key={game.name} game={game} />)}
       </div>
