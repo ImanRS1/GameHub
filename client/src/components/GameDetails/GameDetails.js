@@ -81,9 +81,9 @@ const GameDetails = () => {
           <div className="game-container__details">
             <h2 className="details__name">{gameInfo.name}</h2>
             <div className="details__info" id="description" dangerouslySetInnerHTML={createMarkup()} />
-            <p className="details__info">Release date: {gameInfo.year}</p>
-            <p className="details__info">Platforms: {gameInfo.platforms}</p>
-            <p className="details__info">Genres: {gameInfo.genres}</p>
+            <p className="details__info release">Release date: {gameInfo.year}</p>
+            <p className="details__info">Platforms: {gameInfo.platforms.join(', ')}</p>
+            <p className="details__info">Genres: {gameInfo.genres.join(', ')}</p>
             { gameInfo.gameplayMain && gameInfo.gameplayMain !== 0 ?
             <p className="details__info">Main Story: {gameInfo.gameplayMain}h</p>
             : "" }
@@ -103,7 +103,7 @@ const GameDetails = () => {
       )}
       { gameInfo && (
         <div className="game-container__game-reviews">
-          <h3>Game reviews</h3>
+          <h3 className="game-reviews__title">Game reviews</h3>
           {
             gameInfo.reviews.length > 0 ? 
             gameInfo.reviews.map(review => <Review key={review.user} review={review} rating={gameInfo.ratings.find(rating => rating.user === review.user)} />) : <p>No reviews yet...</p>

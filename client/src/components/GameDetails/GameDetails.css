@@ -32,10 +32,12 @@
 
 .game-container__details {
   padding: 0 0.5rem;
-  margin-top: -5rem;
+  margin-top: -3rem;
   background-color: rgba(41, 41, 41, 0.9);
   font-weight: bolder;
   z-index: 2;
+  margin-bottom: 1rem;
+  line-height: 1.5rem;
 }
 
 .details__name {
@@ -52,12 +54,27 @@
 
 #description {
   font-weight: normal;
+  margin-top: 0.5rem;
   height: 8rem;
   overflow: scroll;
   margin-bottom: 0.5rem;
   text-align: left;
+  letter-spacing: 0.05rem;
 }
 
 .details__info:last-child {
   padding-bottom: 0;
+}
+
+.release {
+  padding-top: 1rem;
+}
+
+.game-container__game-reviews {
+  padding: 0 0.5rem;
+}
+
+.game-reviews__title {
+  padding-bottom: 0.5rem;
+  text-align: center;
 }

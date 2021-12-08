@@ -39,7 +39,7 @@ const Burger = () => {
       <div className={`burger__menu ${!isMounted && "hidden"} ${displayMenu ? "show" : "hide"}`}>
         <h2 className="menu__title">Categories</h2>
         <ul className="menu__list">
-          {genres.map(genre => <BurgerItem key={genre.name} genre={genre} />)}
+          {genres.map(genre => <BurgerItem key={genre.name} genre={genre} clickEvent={toggleBurger}/>)}
         </ul>
       </div>
     </div>

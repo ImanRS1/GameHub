@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setSearchResults } from '../../slices/SearchSlice';
 import './BurgerItem.css';
 
-const BurgerItem = ({ genre }) => {
+const BurgerItem = ({ genre, clickEvent }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,7 +23,8 @@ const BurgerItem = ({ genre }) => {
     dispatch(
       setSearchResults(games)
     );
-    navigate(`/category/${genre.name}`)
+    navigate(`/category/${genre.name}`);
+    clickEvent();
   }
   
   return (
