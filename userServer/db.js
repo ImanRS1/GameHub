@@ -98,6 +98,10 @@ export const getGameStatus = async (username, gameId) => {
       client.release(true);
       return;
     }
+    if (!gameStatus) {
+      client.release(true);
+      return;
+    }
     client.release(true);
     return gameStatus.rows[0].status;
   } catch {
@@ -111,6 +115,10 @@ export const getUserGames = async (username) => {
     const client = await pool.connect();
     const userGames = await client.query(`SELECT gameid, status FROM "Users"."${username}"`);
     if (userGames.rows.length === 0) {
+      client.release(true);
+      return;
+    }
+    if (!userGames) {
       client.release(true);
       return;
     }
