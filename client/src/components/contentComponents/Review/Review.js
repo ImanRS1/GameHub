@@ -39,7 +39,9 @@ const Review = ({ review, rating }) => {
       <div className="review__right-side">
         <div className="right-side__top-info">
           <h3>{review.user}</h3>
+          { rating &&
           <StarRating activeColor="#ffffff" emptyColor="#292929" hoverColor="#ffffff" starClassName="reviews__star" initialRating={rating.rating} isReadOnly={true} size="20" />
+          }
         </div>
         <p>{review.review}</p>
       </div>
