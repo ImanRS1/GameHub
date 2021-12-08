@@ -21,6 +21,9 @@ const GameDetails = () => {
   const getGameStatus = async (username, gameId) => {
     // const urlDev = 'http://localhost:8123';
     const url = 'https://gamehub-userserver.herokuapp.com';
+    if (!username) {
+      return;
+    }
     const status = await axios.post(`${url}/user/game-status`, { username, gameId });
     return status;
   }
