@@ -1,5 +1,6 @@
 import express from 'express';
 import { getGames, getHomeData, getGenres, getGameByGenre, getGameInfo } from './api.js';
+import { getOneGame, getProfileGames, updateRating } from './mongo.js';
 import { config } from 'dotenv';
 import cors from 'cors';
 
@@ -15,6 +16,8 @@ app.get('/api/games/:searchQuery', getGames);
 app.get('/api/home', getHomeData);
 app.get('/api/genres', getGenres);
 app.get('/api/genre/:id', getGameByGenre);
-app.get('/api/game/:id', getGameInfo);
+app.get('/api/game/:id', getOneGame);
+app.put('/api/game/:id', updateRating);
+app.post('/api/profile-games', getProfileGames);
 
-app.listen(process.env.PORT || 4000, () => console.log('App is running on port 4000'));
+app.listen(process.env.PORT || 4123, () => console.log('App is running on port 4123'));

@@ -98,7 +98,7 @@ const getGame = async name => {
         'Client-ID': process.env.IGDB_CLIENT_ID,
         'Authorization': `Bearer ${accessToken.data.access_token}`,
     },
-    data: `search "${name}"; fields artworks,videos;`
+    data: `search "${name}"; fields artworks;`
   });
 
   const game = data.data[0];
@@ -107,7 +107,7 @@ const getGame = async name => {
     return;
   }
 
-  if (!game.artworks && !game.videos) {
+  if (!game.artworks) {
     return;
   }
   
@@ -125,11 +125,7 @@ const getGame = async name => {
     game.image = imageData.data[0].url.replace('t_thumb', 't_screenshot_med');
   }
 
-  if (!game.videos) {
-    game.videos = 'none';
-  };
-
-  return game;
+  return {image: game.image};
 };
 
 const getGameHowLong = async name => {
@@ -153,8 +149,7 @@ const getGameHowLong = async name => {
   return results;
 };
 
-export const getGameInfo = async (req, res) => {
-  const { id } = req.params;
+export const getGameInfo = async id => {
   const dataRAWG = await axios.get(`${baseUrlRAWG}games/${id}?&key=${process.env.RAWG_KEY}`);
 
   const resultsRAWG = {
@@ -164,10 +159,11 @@ export const getGameInfo = async (req, res) => {
     platforms: dataRAWG.data.platforms.map(platform => platform.platform.name),
     description: dataRAWG.data.description,
     background: dataRAWG.data.background_image,
+    id: dataRAWG.data.id
   }
   
   const dataIGDB = await getGame(resultsRAWG.name);
   const dataHLTB = await getGameHowLong(resultsRAWG.name);
 
-  res.send([resultsRAWG, dataHLTB, dataIGDB]);
+  return {...resultsRAWG, ...dataHLTB, ...dataIGDB}; //MAYBE ERROR LIVES HERE!
 }
