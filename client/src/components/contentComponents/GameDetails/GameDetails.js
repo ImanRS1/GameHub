@@ -53,11 +53,12 @@ const GameDetails = () => {
 
   useEffect(() => {
     getGameInfo(id);
-
   }, [showForm]);
 
   const createMarkup = () => {
-    return {__html: gameInfo.description}
+    const gameDesc = gameInfo.description;
+    const newDesc = gameDesc.replaceAll("<br />", "<p><p/>");
+    return {__html: newDesc}
   };
 
   const getRating = () => {

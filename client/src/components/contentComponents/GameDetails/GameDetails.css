@@ -67,6 +67,14 @@
   padding: 0.5rem;
 }
 
+#description p {
+  margin: 0.7rem 0;
+}
+
+#description p:first-child {
+  margin: 0;
+}
+
 .details__info:last-child {
   padding-bottom: 0;
 }
