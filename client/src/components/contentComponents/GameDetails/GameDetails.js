@@ -34,7 +34,7 @@ const GameDetails = () => {
     data.data.reviews = data.data.reviews.reverse();
     setGameInfo(data.data);
     const status = await getGameStatus(username, gameId);
-    if (!status.data) {
+    if (!status || !status.data) {
       return;
     }
     setGameStatus(status.data);
