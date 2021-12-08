@@ -12,7 +12,6 @@ const GameDetails = () => {
   const [gameInfo, setGameInfo] = useState();
   const [gameStatus, setGameStatus] = useState();
   const [showForm, setShowForm] = useState(false);
-
   const { id } = useParams();
 
   const user = useSelector(state => state.user);
