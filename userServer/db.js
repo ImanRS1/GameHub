@@ -77,6 +77,10 @@ export const updateGameList = async (username, gameId, gameName, status) => {
       client.release(true);
       return;
     }
+    if (!updatedGame) {
+      client.release(true);
+      return;
+    }
     await client.query(`UPDATE "Users"."${username}" SET status = $1 WHERE gameid = $2`, [status, gameId]);
     client.release(true);
     return;
