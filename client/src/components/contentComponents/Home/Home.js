@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
 import axios from 'axios';
+import LoadingAnimation from '../../LoadingAnimation/LoadingAnimation';
 import GameDisplay from '../GameDisplay/GameDisplay'
 
 const Home = () => {
@@ -26,11 +27,23 @@ const Home = () => {
       </div>
       <p className="page-content__info">This months most popular games</p>
       <div className="page-content__trending-container">
-        {popularGames.length > 0 && popularGames.map(game => <GameDisplay key={game.name} game={game} />)}
+        {popularGames.length > 0 ? 
+        popularGames.map(game => <GameDisplay key={game.name} game={game} />)
+        :
+        <div className="loading-container">
+          <LoadingAnimation />
+        </div>
+        }
       </div>
       <p className="page-content__info">Top rated of the year</p>
       <div className="page-content__reviewed-container">
-        {topRatedGames.length > 0 && topRatedGames.map(game => <GameDisplay key={game.name} game={game} />)}
+        {topRatedGames.length > 0 ? 
+        topRatedGames.map(game => <GameDisplay key={game.name} game={game} />)
+        :
+        <div className="loading-container">
+        <LoadingAnimation />
+        </div>
+        }
       </div>
     </div>
   );
