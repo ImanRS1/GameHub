@@ -2,12 +2,14 @@
 import React, { useState, useEffect } from 'react'
 import StarRating from 'react-svg-star-rating';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './Review.css'
 
 const Review = ({ review, rating }) => {
   const [userAvatar, setUserAvatar] = useState();
+  const navigate = useNavigate();
   
   const handleLoad = async () => {
     // const urlDev = 'http://localhost:8123';
@@ -16,13 +18,18 @@ const Review = ({ review, rating }) => {
     setUserAvatar(data.data[0].avatar);
   };
 
+  const handleClick = e => {
+    e.preventDefault();
+    navigate(`/users/${review.user}`);
+  }
+
   useEffect(() => {
     handleLoad();
   }, []);
 
   return (
     <div className="review-container">
-      <div className="review__avatar">
+      <div className="review__avatar" onClick={handleClick}>
         { userAvatar ? 
           <img src={userAvatar} alt={review.user} className="review__image picture" />
           :
