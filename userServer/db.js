@@ -54,7 +54,7 @@ export const fetchGameList = async username => {
 
     const games = await client.query(`SELECT * FROM "Users"."${username}"`);
     if (!games.rows) {
-      console.log('no games');
+      return 'No games';
     }
     client.release();
     return user.rows;
@@ -72,7 +72,7 @@ export const updateGameList = async (username, gameId, gameName, status) => {
       client.release();
       return;
     }
-    await client.query(`UPDATE "Users"."${username}" SET status = $1`, [status]);
+    await client.query(`UPDATE "Users"."${username}" SET status = $1 WHERE gameid = $2`, [status, gameId]);
     client.release();
     return;
   } catch {
@@ -92,5 +92,20 @@ export const getGameStatus = async (username, gameId) => {
     return gameStatus.rows[0].status;
   } catch {
     return 'Ooops, something went very very wrong';
+  }
+}
+
+export const getUserGames = async (username) => {
+  try {
+    const client = await pool.connect();
+    const userGames = await client.query(`SELECT gameid, status FROM "Users"."${username}"`);
+    if (userGames.rows.length === 0) {
+      client.release();
+      return;
+    }
+    client.release();
+    return userGames.rows;
+  } catch {
+    return 'Ooops, something went very very very wrong';
   }
 }

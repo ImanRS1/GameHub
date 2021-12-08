@@ -1,6 +1,6 @@
 import express from 'express';
 import { config } from 'dotenv';
-import { addUser, findByEmail, getProfileData, fetchGameList, updateGameList, getGameStatus } from './db.js';
+import { addUser, findByEmail, getProfileData, fetchGameList, updateGameList, getGameStatus, getUserGames } from './db.js';
 import cors from 'cors';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -103,26 +103,20 @@ app.post('/user/game-status', async (req, res) => {
   } catch {
     res.status(500).send();
   }
-})
+});
 
+app.get('/user/:name', async (req, res) => {
+  try {
+    const { name } = req.params;
+    const userGames = await getUserGames(name);
+    res.status(200).send(userGames);
+  } catch {
+    res.status(500).send();
+  }
+});
 
+app.put('/user/:name', async (req, res) => {
 
-//get games list
-    // .post(addToGameList) to add game to list
+});
 
-// app.get('/user/:name', authenticateToken, async (req, res) => {
-//   try {
-//     const { name } = req.params;
-//     const userData = await getProfileData(name);
-//     res.status(200).send(userData);
-//   } catch {
-//     res.status(500).send();
-//   }
-// });
-
-// app.delete('users/logout', (req, res) => {
-//   refreshTokens = refreshTokens.filter(token => token !== req.body.token)
-//   res.sendStatus(204)
-// })
-
-app.listen(process.env.PORT || 8080, () => console.log('App is running on port 8080'));
+app.listen(process.env.PORT || 8123, () => console.log('App is running on port 8123'));
