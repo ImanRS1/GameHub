@@ -58,3 +58,15 @@ export const updateRating = async (req, res) => {
     console.log(err);
   } 
 };
+
+export const updateReview = async (req, res) => {
+  try {    
+    const { review, id, user } = req.body;
+    await client.connect();
+    await client.db("GameHub").collection("games").updateOne({ id: parseInt(id, 10) }, { $push: { reviews: {user, review} }});
+    await client.close();
+    res.status(201).send();
+  } catch (err) {
+    console.log(err);
+  } 
+};
